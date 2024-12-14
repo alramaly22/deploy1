@@ -1,0 +1,107 @@
+{% extends 'base.html' %} {% load static %}
+<!-- This line loads the static tag -->
+{% block content %}
+<!--=============== MAIN ===============-->
+<main class="main" id="main">
+  <!--==================== HOME ====================-->
+  <section class="home" id="home">
+    <div class="video-container">
+      <video class="home__video" autoplay muted loop>
+        <source
+          src="{% static 'video/clothes.mp4' %}"
+          type="video/mp4"
+          type="video/mp4"
+        />
+      </video>
+      <div class="video-overlay"></div>
+    </div>
+    <div class="home__img"></div>
+    <div class="home__container container grid">
+      <div class="home__data">
+        <h1 class="home__title">
+          Redefining Sportswear,<br />
+          Unleash Your Inner Dragon
+        </h1>
+        <p class="home__description">
+          At Dragon, we believe that sports are not just a daily activity but a
+          way of life. Our products are designed to help you push your limits,
+          enhance your performance, and achieve your goals. Join the world of
+          strength and passion, where innovation meets style.
+        </p>
+        <a href="{% url 'home' %}#featured" class="button button--flex">
+          Get Start <i class="ri-arrow-right-circle-fill"></i>
+        </a>
+      </div>
+
+      <div class="home__social">
+        <span class="home__social-follow">Follow Us</span>
+
+        <div class="home__social-links">
+          <a
+            href="https://www.facebook.com/"
+            target="_blank"
+            class="home__social-link"
+          >
+            <i class="ri-facebook-fill"></i>
+          </a>
+          <a
+            href="https://www.facebook.com/"
+            target="_blank"
+            class="home__social-link"
+          >
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            class="home__social-link"
+          >
+            <i class="ri-instagram-line"></i>
+          </a>
+          <a
+            href="https://twitter.com/"
+            target="_blank"
+            class="home__social-link"
+          >
+            <i class="ri-youtube-fill"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- /*=============== ABOUT ===============*/ -->
+
+  <section class="about section" id="about">
+    <div class="about__container container grid">
+      <div class="about__data">
+        <h2 class="section__title">MORE ABOUT US</h2>
+        <p class="about__description">
+          At Dragon store, we are committed to bringing you the finest clothing
+          collections that combine style, comfort, and quality. Our mission is
+          to inspire confidence in every individual by offering unique designs
+          tailored for every occasion.
+        </p>
+        <p class="about__description">
+          From casual wear to elegant outfits, our collections are crafted to
+          suit your personality and enhance your lifestyle. We take pride in
+          using sustainable materials and working with skilled artisans to
+          ensure every piece is as special as you are.
+        </p>
+        <p class="about__description">
+          Discover the essence of timeless fashion with us. Join our journey of
+          creativity, innovation, and style that resonates with all generations.
+        </p>
+        <!-- Uncomment the button below if you'd like a call-to-action -->
+        <!-- <a href="#" class="button">Learn More</a> -->
+      </div>
+      <img
+        src="{% static 'img/5.png' %}"
+        alt="About Us Image"
+        class="about__img"
+      />
+    </div>
+  </section>
+</main>
+
+{% endblock %}

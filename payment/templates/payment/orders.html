@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% load static %}
+<!-- This line loads the static tag -->
+{% block content %}
+<main class="main" id="main">
+  <div class="order-container">
+    <div class="order-summary">
+      <h2>Order #{{ order.id }} - ${{ order.amount_paid }}</h2>
+      <p><strong>Email:</strong> {{ order.email }}</p>
+      <p><strong>Date Ordered:</strong> {{ order.date_ordered }}</p>
+    </div>
+    <div class="customer-details">
+      <h3>Customer Details</h3>
+      <p>{{ order.full_name }}</p>
+      <p>{{ order.shipping_address.line1 }}</p>
+      <p>
+        {% if order.shipping_address.line2 %}{{ order.shipping_address.line2
+        }}{% endif %}
+      </p>
+      <p>{{ order.shipping_address.city }}</p>
+      <p>{{ order.shipping_address.state }}</p>
+      <p>{{ order.shipping_address.zipcode }}</p>
+      <p>{{ order.shipping_address.country }}</p>
+    </div>
+    <div class="order-items">
+      <h3>Items:</h3>
+      <ul>
+        {% for item in order.items.all %}
+        <li>
+          {{ item.product.name }} - ${{ item.price }} (x{{ item.quantity }})
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</main>
+{% endblock %}

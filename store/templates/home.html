@@ -1,0 +1,353 @@
+{% extends 'base.html' %} {% load static %}
+<!-- This line loads the static tag -->
+{% block content %}
+<!--=============== MAIN ===============-->
+<div id="preloader">
+  <div class="logo-container">
+      <img src="{% static 'img/LL.png' %}" alt="Logo" class="logo">
+      <div class="loading-shadow"></div>
+  </div>
+</div>
+<main  class="main ml" id="main">
+  <!--==================== HOME ====================-->
+  <section class="home" id="home" >
+    <div class="video-container">
+      <video class="home__video" autoplay muted loop>
+        <source
+          src="{% static 'video/clothes.mp4' %}"
+          type="video/mp4"
+          type="video/mp4"
+        />
+      </video>
+      <div class="video-overlay"></div>
+    </div>
+    <div class="home__img"></div>
+    <div class="home__container container grid">
+      <div class="home__data">
+        <h1 class="home__title">
+          Discover Your<br />
+          Style with Dragon
+        </h1>
+        <p class="home__description">
+          Welcome to Deragon, where fashion meets elegance. Explore our latest collections and redefine your style.
+
+        </p>
+        <a href="#featured" class="button button--flex">
+          Shop Now <i class="ri-arrow-down-circle-line"></i>
+        </a>
+      </div>
+
+      <div class="home__social">
+        <span class="home__social-follow">Follow Us</span>
+
+        <div class="home__social-links">
+          <a
+            href="https://www.facebook.com/"
+            target="_blank"
+            class="home__social-link"
+          >
+            <i class="ri-facebook-fill"></i>
+          </a>
+          <a
+            href="https://www.facebook.com/"
+            target="_blank"
+            class="home__social-link"
+          >
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            class="home__social-link"
+          >
+            <i class="ri-instagram-line"></i>
+          </a>
+          <a
+            href="https://twitter.com/"
+            target="_blank"
+            class="home__social-link"
+          >
+            <i class="ri-youtube-fill"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured section" id="featured" data-aos="fade-right">
+    <h2 class="section__title">Top Picks for Your Active Lifestyle</h2>
+    <div class="featured__container container">
+      <div class="featured__swiper swiper">
+        <div class="swiper-wrapper">
+          {% for product in products %}
+          <article class="featured__card swiper-slide">
+            <!-- Product Image -->
+            <img
+              src="{{ product.image.url }}"
+              alt="{{ product.name }}"
+              class="featured__img"
+            />
+
+            <!-- Product Title -->
+            <h2 class="featured__title">{{ product.name }}</h2>
+
+            <div class="featured__prices">
+              {% if product.is_sale %}
+              <span class="featured__discount">${{ product.sale_price }}</span>
+              <span class="featured__price"
+                ><strike class="strikenum">${{ product.price }}</strike></span
+              >
+              {% else %}
+              <span class="featured__price">${{ product.price }}</span>
+              {% endif %}
+            </div>
+
+            <a href="{% url 'product' product.id %}" class="button"
+              >View Product</a
+            >
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container all_card" data-aos="fade-right">
+    <h2 class="section__title">Discover Our Collections</h2>
+    <div class="card__container">
+        <!-- Men's Collection -->
+        <article class="card__article">
+            <img src="{% static 'img/1.jpg' %}" alt="Men's Collection" class="card__img" />
+
+            <div class="card__data">
+                <h3 class="card__title">Men's Collection</h3>
+                {% comment %} <p class="card__description">Explore our latest trends in men's fashion. Style that stands out.</p> {% endcomment %}
+            </div>
+
+            <img src="{% static 'img/sidebar-bg.jpg' %}" alt="Background" class="card__bg" />
+
+            <a href="{% url 'category_summary' %}" class="card__button">
+                View More <i class="ri-arrow-right-line"></i>
+            </a>
+        </article>
+
+        <!-- All Collections -->
+        <article class="card__article">
+            <img src="{% static 'img/2.jpg' %}" alt="All Collections" class="card__img" />
+
+            <div class="card__data">
+                <h3 class="card__title">All Collections</h3>
+                {% comment %} <p class="card__description">Dive into our entire range of collections for every occasion.</p> {% endcomment %}
+            </div>
+
+            <img src="{% static 'img/sidebar-bg.jpg' %}" alt="Background" class="card__bg" />
+
+            <a href="{% url 'category_summary' %}" class="card__button">
+                View More <i class="ri-arrow-right-line"></i>
+            </a>
+        </article>
+
+        <!-- Women's Collection -->
+        <article class="card__article">
+            <img src="{% static 'img/55.png' %}" alt="Women's Collection" class="card__img" />
+
+            <div class="card__data">
+                <h3 class="card__title">Women's Collection</h3>
+                {% comment %} <p class="card__description">Elegance and style, discover the perfect looks for every woman.</p> {% endcomment %}
+            </div>
+
+            <img src="{% static 'img/sidebar-bg.jpg' %}" alt="Background" class="card__bg" />
+
+            <a href="{% url 'coming_soon' %}" class="card__button">
+              View More <i class="ri-arrow-right-line"></i>
+          </a>
+          
+        </article>
+    </div>
+</section>
+
+  <!-- =============offer============ -->
+  <section class="visit-section" data-aos="fade-right">
+    <div class="content">
+      <h1>Exclusive Offer: 
+      </br>
+        <span style="color: #b50216;">50% Off</span></h1>
+      <p>
+        Upgrade your wardrobe with our latest collection. Don't miss out on this
+        limited-time offer!
+      </p>
+      <a href="{% url 'category_summary' %}" class="button">Get Offer</a>
+    </div>
+  </section>
+
+  <!-- =============TESTIMONIAL============ -->
+  <section class="testimonial section" id="testimonial" data-aos="fade-right">
+    <h2 class="section__title">What Our Customers Say</h2>
+    <div class="testimonial__container container">
+        <div class="testimonial__swiper swiper">
+            <div class="swiper-wrapper">
+                <!-- Testimonial 1 -->
+                <article class="testimonial__card swiper-slide">
+                    <img src="{% static 'img/client1.jpeg' %}" alt="Client 1" class="testimonial__img" />
+                    <h2 class="testimonial__title">Sarah Johnson</h2>
+                    <p class="testimonial__description">
+                        "I absolutely love the quality of the products. The customer service was fantastic, and delivery was on time. Highly recommend this store!"
+                    </p>
+                    <div class="testimonial__stars">
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                    </div>
+                </article>
+
+                <!-- Testimonial 2 -->
+                <article class="testimonial__card swiper-slide">
+                    <img src="{% static 'img/client2.jpg' %}" alt="Client 2" class="testimonial__img" />
+                    <h2 class="testimonial__title">Michael Lee</h2>
+                    <p class="testimonial__description">
+                        "The variety of collections is amazing. I found exactly what I was looking for, and the prices are very reasonable. Will shop here again!"
+                    </p>
+                    <div class="testimonial__stars">
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                    </div>
+                </article>
+
+                <!-- Testimonial 3 -->
+                <article class="testimonial__card swiper-slide">
+                    <img src="{% static 'img/client3.jpg' %}" alt="Client 3" class="testimonial__img" />
+                    <h2 class="testimonial__title">Emily Davis</h2>
+                    <p class="testimonial__description">
+                        "Excellent quality and amazing designs! I’m so happy with my purchase and have already recommended this store to my friends."
+                    </p>
+                    <div class="testimonial__stars">
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                    </div>
+                </article>
+
+                <!-- Testimonial 4 -->
+                <article class="testimonial__card swiper-slide">
+                    <img src="{% static 'img/client1.jpeg' %}" alt="Client 4" class="testimonial__img" />
+                    <h2 class="testimonial__title">James Smith</h2>
+                    <p class="testimonial__description">
+                        "The service and product quality exceeded my expectations. A must-visit store for anyone looking for stylish and durable clothing."
+                    </p>
+                    <div class="testimonial__stars">
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                        <i class="ri-gemini-fill"></i>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============= Opinion Section ============= -->
+<section class="featured section" id="featured2" data-aos="fade-right" >
+  <h2 class="section__title">Customer Favorites</h2>
+  <div class="featured__container container">
+      <div class="featured__swiper2 swiper">
+          <div class="swiper-wrapper">
+            {% for image in featured_images %}
+              <article class="featured__card swiper-slide" data-id="{{ image.id }}">
+                  <img src="{{ image.image.url }}" alt="{{ image.title }}" class="featured__img" />
+                  <div class="featured__actions">
+                      <button 
+                          aria-label="Like" 
+                          class="like-btn" 
+                          data-liked="{% if image.id in liked_images %}true{% else %}false{% endif %}" 
+                          style="color: {% if image.id in liked_images or image.id in liked_by %}red{% else %}gray{% endif %};"
+                          data-image-id="{{ image.id }}">
+                          <i class="ri-heart-3-fill"></i>
+                      </button>
+                      <span>{{ image.likes_count }}</span>
+                  </div>
+              </article>
+            {% endfor %}
+          </div>
+      </div>
+  </div>
+</section>
+
+
+
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const likeButtons = document.querySelectorAll('.like-btn');
+
+    likeButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const imageId = button.getAttribute('data-image-id');
+            const liked = button.getAttribute('data-liked') === 'true';
+
+            fetch(`/toggle-like/${imageId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: JSON.stringify({ liked: !liked }),
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                if (data.liked !== undefined) {
+                    // تحديث حالة الإعجاب ولون الزر
+                    button.setAttribute('data-liked', data.liked ? 'true' : 'false');
+                    button.style.color = data.liked ? 'red' : 'gray';
+                    
+                    // تحديث عدد الإعجابات
+                    button.nextElementSibling.textContent = data.likes_count;
+                } else if (data.error) {
+                    console.error(data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+});
+
+</script>
+<script>
+  window.addEventListener("load", function() {
+      var loader = document.getElementById("preloader");
+      loader.style.opacity = "0"; // إضافة تأثير للاختفاء بشكل تدريجي
+      setTimeout(function() {
+          loader.style.display = "none"; // بعد أن يختفي تدريجيًا، نقوم بإخفائه
+      }, 1000); // انتظر 1 ثانية (لتأثير الـ opacity)
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %} {% load static %}
+<!-- This line loads the static tag -->
+{% block content %}
+<!--=============== MAIN ===============-->
+<main style="padding-top: 0" class="main" id="main">
+  <div class="login">
+    <img src="{% static 'img/6.png' %}" alt="login image" class="login__img" />
+
+    <!-- Form for login -->
+    <form method="POST" action="{% url 'login' %}" class="login__form">
+      {% csrf_token %}
+      <h1 class="login__title">Login</h1>
+
+      <div class="login__content">
+        <!-- Username input -->
+        <div class="login__box">
+          <i class="ri-user-3-line login__icon"></i>
+
+          <div class="login__box-input">
+            <input
+              type="text"
+              required
+              class="login__input"
+              id="login-email"
+              name="username"
+              placeholder=" "
+            />
+            <label for="login-email" class="login__label">Username</label>
+          </div>
+        </div>
+
+        <!-- Password input -->
+        <div class="login__box">
+          <i class="ri-lock-2-line login__icon"></i>
+
+          <div class="login__box-input">
+            <input
+              type="password"
+              required
+              class="login__input"
+              id="login-pass"
+              name="password"
+              placeholder=" "
+            />
+            <label for="login-pass" class="login__label">Password</label>
+            <i class="ri-eye-off-line login__eye" id="login-eye"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Remember me and Forgot password -->
+      <div class="login__check">
+        <div class="login__check-group">
+          <input
+            type="checkbox"
+            class="login__check-input"
+            id="login-check"
+            name="remember"
+          />
+          <label for="login-check" class="login__check-label"
+            >Remember me</label
+          >
+        </div>
+
+        <a href="#" class="login__forgot">Forgot Password?</a>
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit" class="login__button">Login</button>
+
+      <!-- Register link -->
+      <p class="login__register">
+        Don't have an account? <a href="{% url 'register' %}">Register</a>
+      </p>
+    </form>
+  </div>
+</main>
+{% endblock %}

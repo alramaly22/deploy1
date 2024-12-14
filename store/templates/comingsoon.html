@@ -1,0 +1,92 @@
+{% extends 'base.html' %} {% load static %}
+<!-- This line loads the static tag -->
+{% block content %}
+<main class="main" id="main">
+  <div class="containersoon">
+    <div class="rowsoon">
+      <h3>OUR WEBSITE IS</h3>
+      <h1>COMING SOON</h1>
+      <p>
+        We are almost there! If you would like to be notified when the website
+        goes live, please subscribe to our newsletter.
+      </p>
+      <div class="time-counter">
+        <div class="counter">
+          <span class="bumber days">29</span>
+          <span class="textsoon">Days</span>
+        </div>
+        <div class="counter">
+          <span class="bumber hours">03</span>
+          <span class="textsoon">Hours</span>
+        </div>
+        <div class="counter">
+          <span class="bumber minutes">07</span>
+          <span class="textsoon">Minutes</span>
+        </div>
+        <div class="counter">
+          <span class="bumber seconds">11</span>
+          <span class="textsoon">Seconds</span>
+        </div>
+      </div>
+      <div class="newsletter-form">
+        {% if messages %} {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+        {% endfor %} {% endif %}
+
+        <form
+          action="{% url 'coming_soon' %}"
+          method="post"
+          class="footer__form"
+        >
+          {% csrf_token %}
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            class="footer__input"
+            required
+          />
+          <button class="footer__button button">
+            Subscribe <i class="ri-send-plane-fill"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+<!--=============== SCROLLREVEAL ===============-->
+<script>
+  const seconds = document.querySelector(".seconds");
+  const minutes = document.querySelector(".minutes");
+  const hours = document.querySelector(".hours");
+  const days = document.querySelector(".days");
+  let defSeconds = 11;
+  let defMinuts = 7;
+  let defHours = 3;
+  let defDays = 29;
+
+  const timeFunction = setInterval(() => {
+    defSeconds--;
+    if (defSeconds < 0) {
+      defMinuts--;
+      defSeconds = 59;
+    }
+    if (defMinuts < 0) {
+      defHours--;
+      defMinuts = 59;
+    }
+    if (defHours < 0) {
+      defDays--;
+      defHours = 23;
+    }
+    if (defDays < 0) {
+      clearInterval(timeFunction);
+    }
+
+    seconds.innerHTML = defSeconds < 10 ? `0${defSeconds}` : defSeconds;
+    minutes.innerHTML = defMinuts < 10 ? `0${defMinuts}` : defMinuts;
+    hours.innerHTML = defHours < 10 ? `0${defHours}` : defHours;
+    days.innerHTML = defDays < 10 ? `0${defDays}` : defDays;
+  }, 1000);
+</script>
+{% endblock %}

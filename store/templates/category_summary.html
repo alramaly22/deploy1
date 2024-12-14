@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% load static %}
+<!-- This line loads the static tag -->
+{% block content %}
+<main class="main" id="main">
+  <section class="categories">
+    <div class="categories__header">
+      <h1 class="categories__title">Explore Categories</h1>
+      <p class="categories__description">
+        Discover our unique collection of categories to suit your needs.
+      </p>
+    </div>
+
+    <div class="categories__grid">
+      {% for category in categories %}
+      <!-- Category Item -->
+      <div class="category">
+        <div class="category__icon">
+          <!-- يمكنك هنا إضافة أيقونات إذا أردت -->
+        </div>
+        <h2 class="category__title">{{ category.name }}</h2>
+        <a href="{% url 'category' category.name %}" class="category__link"
+          >View Details</a
+        >
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+<script>
+  // Example: Adding dynamic interactions (Optional)
+  document.querySelectorAll(".category").forEach((item) => {
+    item.addEventListener("click", () => {
+      alert("Category clicked!");
+    });
+  });
+</script>
+{% endblock %}

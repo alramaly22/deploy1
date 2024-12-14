@@ -1,0 +1,128 @@
+{% extends 'base.html' %} {% load static %}
+<!-- This line loads the static tag -->
+{% block content %}
+<main class="main" id="main">
+  <div class="containershipping">
+    <!-- Order Summary -->
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      <div class="order-item">
+        {% for product in cart_products %}
+        <p>
+          <strong>{{ product.name }}:</strong>
+          {% if product.is_sale %} ${{ product.sale_price }} {% else %} ${{
+          product.price }} {% endif %}
+        </p>
+        <p>
+          <strong>Quantity:</strong>
+          {% for key, value in quantities.items %}
+          <!-- Order Summary -->{% if key == product.id|slugify %} {{ value }}
+          {% endif %} {% endfor %}
+        </p>
+        {% endfor %}
+
+        <!-- عرض رسوم التوصيل -->
+        <p>
+          <strong>Delivery Fee:</strong>
+          {% if delivery_fee > 0 %} ${{ delivery_fee }} {% else %} Free
+          {%endif%}
+        </p>
+
+        <!-- عرض التوتال بدون التوصيل -->
+        <p><strong>Subtotal:</strong> ${{ totals }}</p>
+
+        <!-- عرض التوتال مع التوصيل -->
+        <p>
+          <strong>Total (Including Delivery):</strong>
+          $ {{ total_with_delivery}}
+        </p>
+
+        <a href="{% url 'cart_summary' %}">
+          <button class="btn">Update Items</button>
+        </a>
+      </div>
+    </div>
+
+    <!-- Shipping Info -->
+    <div class="shipping-info">
+      <h2>Shipping Info</h2>
+      <form method="POST" action="{% url 'billing_info' %}">
+        {% csrf_token %}
+
+        <!-- Full Name -->
+        <input
+          type="text"
+          name="shipping_full_name"
+          placeholder="Full Name"
+          value="{{ shipping_form.shipping_full_name.value }}"
+          required
+        />
+
+        <!-- Email Address -->
+        <input
+          type="email"
+          name="shipping_email"
+          placeholder="Email Address"
+          value="{{ shipping_form.shipping_email.value }}"
+          required
+        />
+
+        <!-- Address Line 1 -->
+        <input
+          type="text"
+          name="shipping_address1"
+          placeholder="Address Line 1"
+          value="{{ shipping_form.shipping_address1.value }}"
+          required
+        />
+
+        <!-- Address Line 2 -->
+        <input
+          type="text"
+          name="shipping_address2"
+          placeholder="Address Line 2"
+          value="{{ shipping_form.shipping_address2.value }}"
+        />
+
+        <!-- City -->
+        <input
+          type="text"
+          name="shipping_city"
+          placeholder="City"
+          value="{{ shipping_form.shipping_city.value }}"
+          required
+        />
+
+        <!-- State -->
+        <input
+          type="text"
+          name="shipping_state"
+          placeholder="State"
+          value="{{ shipping_form.shipping_state.value }}"
+        />
+
+        <!-- Postal Code -->
+        <input
+          type="text"
+          name="shipping_zipcode"
+          placeholder="Postal Code"
+          value="{{ shipping_form.shipping_zipcode.value }}"
+        />
+
+        <!-- Country -->
+        <input
+          type="text"
+          name="shipping_country"
+          placeholder="Country"
+          value="{{ shipping_form.shipping_country.value }}"
+          required
+        />
+
+        <!-- Submit Button -->
+        <button class="btn" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  {% endblock %}
+</main>

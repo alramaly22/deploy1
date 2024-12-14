@@ -1,0 +1,127 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<main class="main" id="main">
+  <div class="cart-container">
+    {% if cart_products %} {% for product in cart_products %}
+    <div class="cart-item">
+      <img
+        src="{{ product.image.url }}"
+        alt="Product Image"
+        class="product-image2"
+      />
+      <div class="item-details">
+        <h2 class="product-title2">{{ product.name }}</h2>
+        <p class="product-description">{{ product.description }}</p>
+
+        {% if product.is_sale %}
+        <p class="product-price2">
+          <strike class="stricenum">${{ product.price }}</strike>
+          &nbsp; ${{ product.sale_price }}
+        </p>
+        {% else %}
+        <p class="product-price2">${{ product.price }}</p>
+        {% endif %}
+
+        <div class="quantity">
+          <label style="color: white" for="quantity">Quantity:</label>
+          <select id="quantity-{{ product.id }}" class="quantity-select">
+            {% for key, value in quantities.items %}
+            <!-- Testimonial 4 -->
+            {% if key == product.id|slugify %}
+            <option selected>{{ value }}</option>
+            {% endif %} {% endfor %}
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+
+        <div class="item-buttons">
+          <a href="{% url 'home' %}" class="btn home-btn">Home</a>
+          <button class="btn update-btn" data-index="{{ product.id }}">
+            Update
+          </button>
+          <button class="btn remove-btn" data-index="{{ product.id }}">
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+    <div class="cart-summary">
+      <p>Total: <span class="total-price">${{ totals }}</span></p>
+
+      {% if delivery_fee > 0 %}
+      <p style="color: white">
+        Delivery Fee: <span class="delivery-fee">${{ delivery_fee }}</span>
+      </p>
+      {% else %}
+      <p style="color: white">
+        Delivery Fee:
+        <span class="delivery-fee">Free (for orders of 3 or more items)</span>
+      </p>
+      {% endif %}
+
+      <p style="color: white">
+        Total with Delivery:
+        <span class="total-price">${{ total_with_delivery }}</span>
+      </p>
+      <a href="{% url 'checkout' %}" class="checkout-btn">Checkout</a>
+    </div>
+
+    {% else %}
+    <p>There's Nothing In Your Cart</p>
+    {% endif %}
+  </div>
+</main>
+
+<script>
+  // Update Cart
+  $(document).on('click', '.update-btn', function(e){
+    e.preventDefault();
+    var productid = $(this).data('index');
+
+    $.ajax({
+      type: 'POST',
+      url: '{% url 'cart_update' %}',
+      data: {
+        product_id: productid,
+        product_qty: $('#quantity-' + productid).val(),
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        action: 'post'
+      },
+      success: function(json){
+        location.reload();
+      },
+      error: function(xhr, errmsg, err){
+        console.log("Error:", errmsg);
+      }
+    });
+  });
+
+  // Delete Item From Cart
+  $(document).on('click', '.remove-btn', function(e){
+    e.preventDefault();
+    var productid = $(this).data('index');
+
+    $.ajax({
+      type: 'POST',
+      url: '{% url 'cart_delete' %}',
+      data: {
+        product_id: productid,
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        action: 'post'
+      },
+      success: function(json){
+        location.reload();
+      },
+      error: function(xhr, errmsg, err){
+        console.log("Error:", errmsg);
+      }
+    });
+  });
+</script>
+
+{% endblock %}

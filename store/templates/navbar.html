@@ -1,0 +1,152 @@
+{% load static %}
+<header class="header">
+  <div class="header__container container">
+    <div class="header__toggle" id="header-toggle">
+      <i class="ri-menu-line"></i>
+    </div>
+
+    <a href="{% url 'home' %}" class="header__logo">
+      <img src="{% static 'img/LL.png' %}" alt="" />
+    </a>
+    <a href="{% url 'cart_summary' %}">
+      <div class="cart">
+        <button class="cart__button">
+          <span id="cart_quantity"
+            ><i class="ri-shopping-cart-2-fill"></i
+          ></span>
+          Cart
+          <span class="cart__badge" id="cart_quantity">{{ cart|length }}</span>
+        </button>
+      </div>
+    </a>
+  </div>
+</header>
+
+<!--=============== SIDEBAR ===============-->
+<div class="sidebar" id="sidebar">
+  <nav class="sidebar__container">
+    <div class="sidebar__logo">
+      <img src="{% static 'img/LL.png' %}" alt="" class="sidebar__logo-img" />
+      <img src="{% static 'img/LL.png' %}" alt="" class="sidebar__logo-text" />
+    </div>
+
+    <div class="sidebar__content">
+      <div class="sidebar__list">
+        <a href="{% url 'home' %}" class="sidebar__link active-link">
+          <i class="ri-home-5-line"></i>
+          <span class="sidebar__link-name">Home</span>
+          <span class="sidebar__link-floating">Home</span>
+        </a>
+
+        <a href=" {% url 'about' %}" class="sidebar__link">
+          <i class="ri-information-line"></i>
+          <span class="sidebar__link-name">About</span>
+          <span class="sidebar__link-floating">About</span>
+        </a>
+      </div>
+      {% if user.is_superuser%}
+      <h3 class="sidebar__title">
+        <span>Orders</span>
+      </h3>
+
+      <div class="sidebar__link dropdown">
+        <div class="mm">
+          <i class="ri-store-2-fill"></i>
+          <span class="sidebar__link-name">Order</span>
+          <i class="arrow">&#x25BC;</i>
+        </div>
+        <ul class="sidebar__dropdown">
+          <li class="sidebar__dropdown-link">
+            <a href="{% url 'shipped_dash' %}" class="ss">Shipped Orders</a>
+          </li>
+          <li class="sidebar__dropdown-link">
+            <a href="{% url 'not_shipped_dash'%}" class="ss"
+              >Un Shipped Orders</a
+            >
+          </li>
+        </ul>
+      </div>
+      {% endif%}
+      <div class="sidebar__link dropdown">
+        <div class="mm">
+          <i class="ri-layout-left-fill"></i>
+          <span class="sidebar__link-name">Categories</span>
+          <i class="arrow">&#x25BC;</i>
+        </div>
+        <ul class="sidebar__dropdown">
+          <li class="sidebar__dropdown-link">
+            <a href="{% url 'category_summary' %}" class="ss">All Products</a>
+          </li>
+          <li class="sidebar__dropdown-link">
+            <a href="{% url 'category' 'programing-book'%}" class="ss"
+              >Programming Book</a
+            >
+          </li>
+          <li class="sidebar__dropdown-link">
+            <a href="{% url 'category' 'call-phone'%}" class="ss"
+              >Markrting Books</a
+            >
+          </li>
+        </ul>
+      </div>
+      {% if user.is_authenticated %}
+      <h3 class="sidebar__title">
+        <span>Profile</span>
+      </h3>
+
+      <div class="sidebar__link dropdown">
+        <div class="mm">
+          <i class="ri-user-line"></i>
+          <span class="sidebar__link-name">Profile</span>
+          <i class="arrow">&#x25BC;</i>
+        </div>
+        <ul class="sidebar__dropdown">
+          <li class="sidebar__dropdown-link">
+            <a href="{% url 'update_user' %}" class="ss">User Profile</a>
+          </li>
+          <li class="sidebar__dropdown-link">
+            <a href="{% url 'update_info'%}" class="ss">User Info</a>
+          </li>
+        </ul>
+      </div>
+
+      <h3 class="sidebar__title">
+        <span>General</span>
+      </h3>
+
+      <div class="sidebar__list">
+        <a href="{% url 'logout' %}" class="sidebar__link">
+          <i class="ri-logout-box-r-line"></i>
+          <span class="sidebar__link-name">Logout</span>
+          <span class="sidebar__link-floating">Logout</span>
+        </a>
+        {% else %}
+        <a href="{% url 'login' %}" class="sidebar__link">
+          <i class="ri-login-box-line"></i>
+          <span class="sidebar__link-name">Login</span>
+          <span class="sidebar__link-floating">Login</span>
+        </a>
+        <a href="{% url 'register' %}" class="sidebar__link">
+          <i class="ri-user-add-line"></i>
+          <span class="sidebar__link-name">Register</span>
+          <span class="sidebar__link-floating">Register</span>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="sidebar__account">
+      <img
+        src="{% static 'img/profilephotoe.jpg' %}"
+        alt=""
+        class="sidebar__perfil"
+      />
+      <div class="sidebar__names">
+        <h3 class="sidebar__name">
+          {{ request.user.first_name }} {{ request.user.last_name }}
+        </h3>
+        <span class="sidebar__email">{{ request.user.email }}</span>
+      </div>
+    </div>
+  </nav>
+</div>

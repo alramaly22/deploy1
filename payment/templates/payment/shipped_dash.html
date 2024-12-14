@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% load static %}
+<!-- This line loads the static tag -->
+{% block content %}
+<main class="main" id="main">
+  <div class="containershipping2">
+    <h1>Shipped Items</h1>
+    <table class="responsive-table">
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Price</th>
+          <th>Customer Email</th>
+          <th>Date Ordered</th>
+          <th>Shipped</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in orders %}
+        <tr>
+          <td data-label="Order">
+            <a class="numorder" href="{% url 'orders' item.id %}"
+              >{{ item.id }}</a
+            >
+          </td>
+          <td data-label="Price">${{ item.amount_paid }}</td>
+          <td data-label="Customer Email">{{ item.email }}</td>
+          <td data-label="Date Ordered">{{ item.date_shipped }}</td>
+          <td data-label="Shipped">
+            <form method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="shipping_status" value="false" />
+              <input type="hidden" name="num" value="{{ item.id }}" />
+              <button type="Submit" class="ship-btn">Mark UnShipped</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</main>
+{% endblock %}

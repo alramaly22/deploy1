@@ -1,0 +1,106 @@
+{% extends 'base.html' %} {% load static %}
+<!-- This line loads the static tag -->
+{% block content %}
+<!--=============== MAIN ===============-->
+<main class="main" id="main">
+  <div class="container productcontainer">
+    <div class="product">
+      <!-- Product Image Section -->
+      <div class="product-image">
+        <img id="mainImage" src="{{ product.image.url }}" alt="Product Image" />
+        <div class="thumbnails">
+          <!-- هنا نقوم بعرض الصور المصغرة -->
+          <div class="thumbnails">
+            {% for image in product_images %}
+            <img
+              onclick="changeImage('{{ image.image.url }}')"
+              src="{{ image.image.url }}"
+              alt="Thumbnail {{ forloop.counter }}"
+            />
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Details Section -->
+      <div class="product-details">
+        <h2>{{ product.brand }}</h2>
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.description }}</p>
+
+        <div class="price">
+          {% if product.is_sale %}
+          <span class="current-price">${{ product.sale_price }}</span>
+          <span class="discount">{{ product.discount_percentage }}% off</span>
+          <span class="original-price">${{ product.price }}</span>
+          {% else %}
+          <span class="current-price">${{ product.price }}</span>
+          {% endif %}
+        </div>
+
+        <div class="quantity">
+          <button onclick="decreaseQuantity()">-</button>
+          <input id="quantity" type="number" value="1" readonly />
+          <button onclick="increaseQuantity()">+</button>
+        </div>
+
+        <div class="button-container">
+          <a href="{% url 'home' %}" class="btn homeee">Home</a>
+          <button
+            type="button"
+            value="{{ product.id }}"
+            class="btn add-to-cart"
+            id="add-cart"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Change main image when thumbnail is clicked
+  function changeImage(imageUrl) {
+      document.getElementById("mainImage").src = imageUrl;
+  }
+
+  // Increase quantity
+  function increaseQuantity() {
+      var quantityInput = document.getElementById("quantity");
+      quantityInput.value = parseInt(quantityInput.value) + 1;
+  }
+
+  // Decrease quantity
+  function decreaseQuantity() {
+      var quantityInput = document.getElementById("quantity");
+      if (quantityInput.value > 1) {
+          quantityInput.value = parseInt(quantityInput.value) - 1;
+      }
+  }
+
+  // Add to cart functionality using Ajax
+  $(document).on('click', '#add-cart', function(e) {
+      e.preventDefault();
+      $.ajax({
+          type: 'POST',
+          url: '{% url 'cart_add' %}',
+          data: {
+              product_id: $('#add-cart').val(),
+              product_qty: $('#quantity').val(),
+              csrfmiddlewaretoken: '{{ csrf_token }}',
+              action: 'post'
+          },
+          success: function(json) {
+              document.getElementById("cart_quantity").textContent = json.qty;
+              location.reload();
+          },
+          error: function(xhr, errmsg, err) {
+              console.error("Error: " + errmsg);
+          }
+      });
+  });
+</script>
+
+{% endblock %}
