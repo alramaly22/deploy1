@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!(z@15mx4g9^%+c+6va$bl0c9r)-)7x0lyrg#3b#c@4t9u7km6
 DEBUG = False  # في بيئة الإنتاج
 
 
-ALLOWED_HOSTS = ['https://deploy1-production-84f3.up.railway.app/', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['deploy1-production-84f3.up.railway.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -140,6 +140,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://deploy1-production-84f3.up.railway.app',
 ]
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 STATIC_URL = '/static/'
@@ -149,8 +150,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # هذا هو المكا�
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+MEDIA_ROOT = os.path.join(os.environ.get('RAILWAY_VOLUME_MOUNT_PATH', BASE_DIR), 'media')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
