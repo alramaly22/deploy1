@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!(z@15mx4g9^%+c+6va$bl0c9r)-)7x0lyrg#3b#c@4t9u7km6
 DEBUG = False  # في بيئة الإنتاج
 
 
-ALLOWED_HOSTS = ['deploy1-production-84f3.up.railway.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['https://deploy1-production-84f3.up.railway.app/', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -132,7 +132,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 CSRF_COOKIE_SECURE = False
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False
 SECURE_SSL_REDIRECT = True
 
 
