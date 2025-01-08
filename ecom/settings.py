@@ -23,7 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!(z@15mx4g9^%+c+6va$bl0c9r)-)7x0lyrg#3b#c@4t9u7km6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False  # في بيئة الإنتاج
+DEBUG = True
+  # في بيئة الإنتاج
 
 
 ALLOWED_HOSTS = ['deploy1-production-84f3.up.railway.app', 'localhost', '127.0.0.1']
@@ -152,8 +153,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # هذا هو المكا�
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 # Default primary key field type
