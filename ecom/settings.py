@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-!(z@15mx4g9^%+c+6va$bl0c9r)-)7x0lyrg#3b#c@4t9u7km6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app','localhost','127.0.0.1','.now.sh']
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -78,15 +79,26 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
+
     'default': {
+
+        #'ENGINE': 'django.db.backends.sqlite3',
+
         'ENGINE': 'django.db.backends.postgresql',
+
         'NAME': 'railway',
+
         'USER': 'postgres',
-        'PASSWORD': 'jQIVWdjBCoLcjSLTEUPnsGWLXHPLEbeu',
-        'HOST': 'junction.proxy.rlwy.net',
-        'PORT': '58590',  
+
+        'PASSWORD': 'uHvBnFqucZMSqxVGzaPnujCIYuDvXtFD',
+
+        'HOST': 'autorack.proxy.rlwy.net',  # اسم المضيف
+        'PORT': '40213',
+
     }
-} 
+
+}
+
 
 
 # Password validation
@@ -117,14 +129,16 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'staticfiles_build', 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
