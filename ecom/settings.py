@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!(z@15mx4g9^%+c+6va$bl0c9r)-)7x0lyrg#3b#c@4t9u7km6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False  # في بيئة الإنتاج
 
 
 ALLOWED_HOSTS = ['deploy1-production-84f3.up.railway.app', 'localhost', '127.0.0.1']
@@ -132,11 +132,13 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 CSRF_COOKIE_SECURE = False
-SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
 
-SECURE_SSL_REDIRECT = False
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://deploy1-production-84f3.up.railway.app',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
