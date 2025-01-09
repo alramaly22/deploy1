@@ -25,6 +25,9 @@ SECRET_KEY = 'django-insecure-!(z@15mx4g9^%+c+6va$bl0c9r)-)7x0lyrg#3b#c@4t9u7km6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
   # في بيئة الإنتاج
+# settings.py
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 20971520  # 20MB
 
 
 ALLOWED_HOSTS = ['deploy1-production-84f3.up.railway.app', 'localhost', '127.0.0.1']
