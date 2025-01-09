@@ -267,18 +267,13 @@ ul {
     height: 100%;
 }
 
-.sidebar__logo {
-    display: grid;
-    grid-template-columns: repeat(2, max-content);
-    column-gap: .5rem;
-}
-
 .sidebar__logo-img {
     width: 37px;
+    display: none;
 }
 
 .sidebar__logo-text {
-    width: 76px;
+    width: 100%;
 }
 
 .sidebar__content {
@@ -462,6 +457,7 @@ ul {
 }
 
 .sidebar__email {
+    color: white;
     font-size: var(--small-font-size);
     font-weight: var(--font-medium);
 }
@@ -553,7 +549,7 @@ ul {
 
 .login__title {
     color: var(--white-color);
-    text-align: center;
+    align-items: baseline;
     font-size: var(--h1-font-size);
     font-weight: var(--font-medium);
     margin-bottom: 2rem;
@@ -615,8 +611,8 @@ ul {
 
 .login__eye {
     position: absolute;
-    right: 0;
-    top: 18px;
+    right: 5px;
+    top: 8px;
     z-index: 10;
     cursor: pointer;
 }
@@ -1703,6 +1699,7 @@ ul {
     width: auto;
     justify-content: center;
     align-items: end;
+    gap: .5rem;
 }
 
 .total-price {
@@ -2008,7 +2005,18 @@ ul {
 }
 
 .form-text li {
-    color: white;
+    color: rgb(255, 0, 0);
+    text-align: left;
+    padding: 2px;
+    margin: 0.5rem;
+}
+
+.field-rules,
+.help-text {
+    color: rgb(255, 0, 0);
+    text-align: left;
+    padding: 2px;
+    margin: 0.5rem;
 }
 
 .visit-section {
