@@ -73,7 +73,11 @@ class SignUpForm(UserCreationForm):
         self.fields['username'].widget.attrs['class'] = 'info-field'
         self.fields['username'].widget.attrs['placeholder'] = 'User Name'
         self.fields['username'].label = ''
-        self.fields['username'].help_text = ''  # إزالة النص المساعد
+        self.fields['username'].help_text = '''<ul class="form-text text-muted small">
+                                                <li>Username must be at least 6 characters long.</li>
+                                                <li>Username should contain only letters, numbers, and underscores.</li>
+                                                <li>Username cannot be the same as your email.</li>
+                                                </ul>'''  # إزالة النص المساعد
 
         self.fields['password1'].widget.attrs['class'] = 'info-field'
         self.fields['password1'].widget.attrs['placeholder'] = 'Password'

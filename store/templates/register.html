@@ -23,6 +23,11 @@
             <label for="{{ field.id_for_label }}" class="login__label">
               {{ field.label }}
             </label>
+
+            <!-- Displaying field-specific rules -->
+            {% if field.help_text %}
+            <div class="field-rules">{{ field.help_text|safe }}</div>
+            {% endif %}
           </div>
         </div>
         {% endfor %}
