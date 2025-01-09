@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'cart',
     'payment',
     'store',
+    'cloudinary',
+    'cloudinary_storage',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -153,7 +156,17 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # هذا هو المكا�
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL = 'media/'
+
+# Cloudinary Settings
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dfnstdef5',
+    'API_KEY': '794753872216458',
+    'API_SECRET': 'BuDVOOnbQTnzXNfqon8jwmO4OGU',
+}
+
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
