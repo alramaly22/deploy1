@@ -27,7 +27,7 @@ DEBUG = True
   # في بيئة الإنتاج
 # settings.py
 
-FILE_UPLOAD_MAX_MEMORY_SIZE = 20971520  # 20MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50MB
 
 
 ALLOWED_HOSTS = ['deploy1-production-84f3.up.railway.app', 'localhost', '127.0.0.1']
