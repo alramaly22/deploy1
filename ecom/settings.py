@@ -99,10 +99,10 @@ DATABASES = {
 
         'USER': 'postgres',
 
-        'PASSWORD': 'uHvBnFqucZMSqxVGzaPnujCIYuDvXtFD',
+        'PASSWORD': 'tBaMRgCySytBvseGANHolQSGszTerIFg',
 
         'HOST': 'autorack.proxy.rlwy.net',  # اسم المضيف
-        'PORT': '40213',
+        'PORT': '58014',
 
     }
 
@@ -171,7 +171,7 @@ CLOUDINARY_STORAGE = {
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+LOGIN_URL = 'login' 
 
 
 # Default primary key field type
