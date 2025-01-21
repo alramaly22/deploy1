@@ -1,84 +1,94 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <main class="main" id="main">
   <div class="cart-container">
-    {% if cart_products %} {% for product in cart_products %}
-    <div class="cart-item">
-      <img
-        src="{{ product.image.url }}"
-        alt="Product Image"
-        class="product-image2"
-      />
-      <div class="item-details">
-        <h2 class="product-title2">{{ product.name }}</h2>
-        <p class="product-description">{{ product.description }}</p>
+    {% if cart_products %}
+      {% for product, item in cart_products.items %}
+      <div class="cart-item">
+        <img
+          src="{{ product.image.url }}"
+          alt="Product Image"
+          class="product-image2"
+        />
+        <div class="item-details">
+          <h2 class="product-title2">{{ product.name }}</h2>
+          <p class="product-description">{{ product.description }}</p>
 
-        {% if product.is_sale %}
-        <p class="product-price2">
-          <strike class="stricenum">${{ product.price }}</strike>
-          &nbsp; ${{ product.sale_price }}
-        </p>
-        {% else %}
-        <p class="product-price2">${{ product.price }}</p>
-        {% endif %}
+          <!-- عرض وتحديث المقاس -->
+          <div class="size-selection">
+            <label style="color:white" for="size-{{ product.id }}">Size:</label>
+            <select id="size-{{ product.id }}" class="size-select">
+              {% for size in product.sizes.split %}
+                <option value="{{ size }}" {% if size == item.size %}selected{% endif %}>{{ size }}</option>
+              {% endfor %}
+            </select>
+          </div>
 
-        <div class="quantity">
-          <label style="color: white" for="quantity">Quantity:</label>
-          <select id="quantity-{{ product.id }}" class="quantity-select">
-            {% for key, value in quantities.items %}
-            <!-- Testimonial 4 -->
-            {% if key == product.id|slugify %}
-            <option selected>{{ value }}</option>
-            {% endif %} {% endfor %}
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </div>
+          {% if product.is_sale %}
+          <p class="product-price2">
+            <strike class="stricenum">EGP{{ product.price }}</strike>
+            &nbsp; EGP{{ product.sale_price }}
+          </p>
+          {% else %}
+          <p class="product-price2">EGP{{ product.price }}</p>
+          {% endif %}
 
-        <div class="item-buttons">
-          <a href="{% url 'home' %}" class="btn home-btn">Home</a>
-          <button class="btn update-btn" data-index="{{ product.id }}">
-            Update
-          </button>
-          <button class="btn remove-btn" data-index="{{ product.id }}">
-            Remove
-          </button>
+          <div class="quantity">
+            <label style="color: white" for="quantity">Quantity:</label>
+            <select id="quantity-{{ product.id }}" class="quantity-select">
+              <option selected>{{ item.quantity }}</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="item-buttons">
+            <a href="{% url 'home' %}" class="btn home-btn">Home</a>
+            <button class="btn update-btn" data-index="{{ product.id }}">
+              Update
+            </button>
+            <button class="btn remove-btn" data-index="{{ product.id }}">
+              Remove
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    {% endfor %}
+      {% endfor %}
 
-    <div class="cart-summary">
-      <p>Total: <span class="total-price">${{ totals }}</span></p>
+      <div class="cart-summary">
+        <p>Total: <span class="total-price">EGP{{ totals }}</span></p>
 
-      {% if delivery_fee > 0 %}
-      <p style="color: white">
-        Delivery Fee: <span class="delivery-fee">${{ delivery_fee }}</span>
-      </p>
-      {% else %}
-      <p style="color: white">
-        Delivery Fee:
-        <span class="delivery-fee">Free (for orders of 3 or more items)</span>
-      </p>
-      {% endif %}
+        <p style="color: white">
+          Delivery Fee: <span class="delivery-fee">EGP{{ delivery_fee }}</span>
+        </p>
 
-      <p style="color: white">
-        Total with Delivery:
-        <span class="total-price">${{ total_with_delivery }}</span>
-      </p>
-      <a href="{% url 'checkout' %}" class="checkout-btn">Checkout</a>
-    </div>
+        <p style="color: white">
+          Total with Delivery:
+          <span class="total-price">EGP{{ total_with_delivery }}</span>
+        </p>
+
+        <!-- زر Checkout مع التحقق من تسجيل الدخول -->
+        {% if user.is_authenticated %}
+          <a href="{% url 'checkout' %}" class="checkout-btn">Checkout</a>
+        {% else %}
+          <div class="buttonalerttocheckout">
+            You need to <a href="{% url 'login' %}?next={% url 'checkout' %}">log in</a> to proceed to checkout.
+          </div>
+        {% endif %}
+      </div>
 
     {% else %}
-    <p>There's Nothing In Your Cart</p>
+      <p>There's Nothing In Your Cart</p>
     {% endif %}
   </div>
 </main>
 
 <script>
-  // Update Cart
+  // تحديث الكمية والمقاس في عربة التسوق
   $(document).on('click', '.update-btn', function(e){
     e.preventDefault();
     var productid = $(this).data('index');
@@ -88,7 +98,8 @@
       url: '{% url 'cart_update' %}',
       data: {
         product_id: productid,
-        product_qty: $('#quantity-' + productid).val(),
+        product_qty: $('#quantity-' + productid).val(),  // إرسال الكمية
+        product_size: $('#size-' + productid).val(),  // إرسال المقاس
         csrfmiddlewaretoken: '{{ csrf_token }}',
         action: 'post'
       },
@@ -101,7 +112,7 @@
     });
   });
 
-  // Delete Item From Cart
+  // حذف منتج من عربة التسوق
   $(document).on('click', '.remove-btn', function(e){
     e.preventDefault();
     var productid = $(this).data('index');
