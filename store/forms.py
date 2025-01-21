@@ -5,20 +5,19 @@ from .models import Profile
 
 
 class UserInfoForm(forms.ModelForm):
-	phone = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'Phone'}), required=False)
-	address1 = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'Address 1'}), required=False)
-	address2 = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'Address 2'}), required=False)
-	city = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'City'}), required=False)
-	state = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'State'}), required=False)
-	zipcode = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'Zipcode'}), required=False)
-	country = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'Country'}), required=False)
+    phone = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'Phone'}), required=False)
+    address1 = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'Address 1'}), required=False)
+    address2 = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'Address 2'}), required=False)
+    city = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'City'}), required=False)
+    state = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'State'}), required=False)
+    zipcode = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'Zipcode'}), required=False)
+    country = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'Country'}), required=False)
+    full_name = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'Full Name'}), required=False)
+    email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'info-field', 'placeholder':'Email'}), required=False)
 
-	class Meta:
-		model = Profile
-		fields = ('phone', 'address1', 'address2', 'city', 'state', 'zipcode', 'country', )
-
-
-
+    class Meta:
+        model = Profile
+        fields = ('full_name', 'phone', 'email', 'address1', 'address2', 'city', 'state', 'zipcode', 'country', )
 class ChangePasswordForm(SetPasswordForm):
 	class Meta:
 		model = User

@@ -1,6 +1,4 @@
-{% extends 'base.html' %} {% load static %}
-<!-- This line loads the static tag -->
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <!--=============== MAIN ===============-->
 <main class="main" id="main">
   <div class="container productcontainer">
@@ -9,7 +7,7 @@
       <div class="product-image">
         <img id="mainImage" src="{{ product.image.url }}" alt="Product Image" />
         <div class="thumbnails">
-          <!-- هنا نقوم بعرض الصور المصغرة -->
+          <!-- عرض الصور المصغرة -->
           <div class="thumbnails">
             {% for image in product_images %}
             <img
@@ -38,6 +36,18 @@
           {% endif %}
         </div>
 
+        <!-- إضافة اختيار المقاس -->
+        <div class="size-selection">
+          <label for="size" style="color: white;">Size:</label>
+          <select id="size" name="size" class="size-select">
+            {% if product.sizes %} {% for size in product.sizes.split %}
+            <option value="{{ size }}">{{ size }}</option>
+            {% endfor %} {% else %}
+            <option value="One Size">One Size</option>
+            {% endif %}
+          </select>
+        </div>
+
         <div class="quantity">
           <button onclick="decreaseQuantity()">-</button>
           <input id="quantity" type="number" value="1" readonly />
@@ -61,18 +71,18 @@
 </main>
 
 <script>
-  // Change main image when thumbnail is clicked
+  // تغيير الصورة الرئيسية عند النقر على الصورة المصغرة
   function changeImage(imageUrl) {
       document.getElementById("mainImage").src = imageUrl;
   }
 
-  // Increase quantity
+  // زيادة الكمية
   function increaseQuantity() {
       var quantityInput = document.getElementById("quantity");
       quantityInput.value = parseInt(quantityInput.value) + 1;
   }
 
-  // Decrease quantity
+  // تقليل الكمية
   function decreaseQuantity() {
       var quantityInput = document.getElementById("quantity");
       if (quantityInput.value > 1) {
@@ -80,7 +90,7 @@
       }
   }
 
-  // Add to cart functionality using Ajax
+  // إضافة المنتج إلى عربة التسوق باستخدام Ajax
   $(document).on('click', '#add-cart', function(e) {
       e.preventDefault();
       $.ajax({
@@ -89,6 +99,7 @@
           data: {
               product_id: $('#add-cart').val(),
               product_qty: $('#quantity').val(),
+              product_size: $('#size').val(),  // إرسال المقاس
               csrfmiddlewaretoken: '{{ csrf_token }}',
               action: 'post'
           },
