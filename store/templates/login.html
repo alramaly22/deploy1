@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% load static %}
+{% extends 'base.html' %} 
+{% load static %}
 <!-- This line loads the static tag -->
 {% block content %}
 <!--=============== MAIN ===============-->
@@ -75,4 +76,25 @@
     </form>
   </div>
 </main>
+
+<!-- JavaScript to toggle password visibility -->
+<script>
+  // Get the eye icon and password input
+  const eyeIcon = document.getElementById('login-eye');
+  const passwordInput = document.getElementById('login-pass');
+
+  // Add click event listener to the eye icon
+  eyeIcon.addEventListener('click', function () {
+    // Toggle the password input type between 'password' and 'text'
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      eyeIcon.classList.remove('ri-eye-off-line');
+      eyeIcon.classList.add('ri-eye-line');
+    } else {
+      passwordInput.type = 'password';
+      eyeIcon.classList.remove('ri-eye-line');
+      eyeIcon.classList.add('ri-eye-off-line');
+    }
+  });
+</script>
 {% endblock %}
