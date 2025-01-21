@@ -46,83 +46,78 @@
     <!-- Shipping Info -->
     <div class="shipping-info">
       <h2>Shipping Info</h2>
+      {% if user.is_authenticated %}
       <form method="POST" action="{% url 'billing_info' %}">
         {% csrf_token %}
-
-        <!-- Full Name -->
-        <input
-          type="text"
-          name="shipping_full_name"
-          placeholder="Full Name"
-          value="{{ shipping_form.shipping_full_name.value }}"
-          required
-        />
-
-        <!-- Email Address -->
-        <input
-          type="email"
-          name="shipping_email"
-          placeholder="Email Address"
-          value="{{ shipping_form.shipping_email.value }}"
-          required
-        />
-
-        <!-- Address Line 1 -->
-        <input
-          type="text"
-          name="shipping_address1"
-          placeholder="Address Line 1"
-          value="{{ shipping_form.shipping_address1.value }}"
-          required
-        />
-
-        <!-- Address Line 2 -->
-        <input
-          type="text"
-          name="shipping_address2"
-          placeholder="Address Line 2"
-          value="{{ shipping_form.shipping_address2.value }}"
-        />
-
-        <!-- City -->
-        <input
-          type="text"
-          name="shipping_city"
-          placeholder="City"
-          value="{{ shipping_form.shipping_city.value }}"
-          required
-        />
-
-        <!-- State -->
-        <input
-          type="text"
-          name="shipping_state"
-          placeholder="State"
-          value="{{ shipping_form.shipping_state.value }}"
-        />
-
-        <!-- Postal Code -->
-        <input
-          type="text"
-          name="shipping_zipcode"
-          placeholder="Postal Code"
-          value="{{ shipping_form.shipping_zipcode.value }}"
-        />
-
-        <!-- Country -->
-        <input
-          type="text"
-          name="shipping_country"
-          placeholder="Country"
-          value="{{ shipping_form.shipping_country.value }}"
-          required
-        />
-
-        <!-- Submit Button -->
-        <button class="btn" type="submit">Submit</button>
+        <div class="form-group">
+          <label for="shipping_full_name">Full Name</label>
+          <input
+            type="text"
+            id="shipping_full_name"
+            name="shipping_full_name"
+            value="{{ shipping_form.full_name.value|default_if_none:'' }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="shipping_email">Email Address</label>
+          <input
+            type="email"
+            id="shipping_email"
+            name="shipping_email"
+            value="{{ shipping_form.email.value|default_if_none:'' }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="shipping_address1">Address Line 1</label>
+          <input
+            type="text"
+            id="shipping_address1"
+            name="shipping_address1"
+            value="{{ shipping_form.address.value|default_if_none:'' }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="shipping_city">City</label>
+          <input
+            type="text"
+            id="shipping_city"
+            name="shipping_city"
+            value="{{ shipping_form.city.value|default_if_none:'' }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="shipping_state">State</label>
+          <input
+            type="text"
+            id="shipping_state"
+            name="shipping_state"
+            value="{{ shipping_form.state.value|default_if_none:'' }}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="shipping_country">Country</label>
+          <input
+            type="text"
+            id="shipping_country"
+            name="shipping_country"
+            value="{{ shipping_form.country.value|default_if_none:'' }}"
+            required
+          />
+        </div>
+        <button type="submit" class="btn">Submit</button>
       </form>
+      {% else %}
+      <div class="alert alert-warning">
+        You need to
+        <a href="{% url 'login' %}?next={% url 'checkout' %}">log in</a> to
+        proceed to checkout.
+      </div>
+      {% endif %}
     </div>
   </div>
-
-  {% endblock %}
 </main>
+{% endblock %}

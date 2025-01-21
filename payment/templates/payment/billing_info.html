@@ -43,21 +43,19 @@
     </div>
 
     <!-- Shipping Info -->
-    <div class="order-summary">
+    <div class="shipping-info">
       <h2>Shipping Info</h2>
       <div class="order-item">
-        <p><strong>Name:</strong> {{ shipping_info.shipping_full_name }}</p>
-        <p><strong>Email:</strong> {{ shipping_info.shipping_email }}</p>
-        <p><strong>Address 1:</strong> {{ shipping_info.shipping_address1 }}</p>
-        <p><strong>Address 2:</strong> {{ shipping_info.shipping_address2 }}</p>
-        <p><strong>City:</strong> {{ shipping_info.shipping_city }}</p>
-        <p><strong>State:</strong> {{ shipping_info.shipping_state }}</p>
-        <p><strong>Zipcode:</strong> {{ shipping_info.shipping_zipcode }}</p>
-        <p><strong>Country:</strong> {{ shipping_info.shipping_country }}</p>
+        <p><strong>Name:</strong> {{ shipping_info.full_name }}</p>
+        <p><strong>Email:</strong> {{ shipping_info.email }}</p>
+        <p><strong>Address 1:</strong> {{ shipping_info.address }}</p>
+        <p><strong>City:</strong> {{ shipping_info.city }}</p>
+        <p><strong>State:</strong> {{ shipping_info.state }}</p>
+        <p><strong>Country:</strong> {{ shipping_info.country }}</p>
       </div>
-      <button class="btn" onclick="window.location.href='{% url 'checkout' %}'">
-        Update Shipping
-      </button>
+      <a href="{% url 'checkout' %}">
+        <button class="btn">Update Shipping</button>
+      </a>
     </div>
 
     <!-- Billing Info -->
