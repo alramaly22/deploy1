@@ -1,11 +1,10 @@
-{% extends 'base.html' %} 
-{% load static %}
+{% extends 'base.html' %} {% load static %}
 <!-- This line loads the static tag -->
 {% block content %}
 <!--=============== MAIN ===============-->
 <main style="padding-top: 0" class="main" id="main">
   <div class="login">
-    <img src="{% static 'img/6.png' %}" alt="login image" class="login__img" />
+    <img src="{% static 'img/6.webp' %}" alt="login image" class="login__img" />
 
     <!-- Form for login -->
     <form method="POST" action="{% url 'login' %}" class="login__form">
@@ -80,20 +79,20 @@
 <!-- JavaScript to toggle password visibility -->
 <script>
   // Get the eye icon and password input
-  const eyeIcon = document.getElementById('login-eye');
-  const passwordInput = document.getElementById('login-pass');
+  const eyeIcon = document.getElementById("login-eye");
+  const passwordInput = document.getElementById("login-pass");
 
   // Add click event listener to the eye icon
-  eyeIcon.addEventListener('click', function () {
+  eyeIcon.addEventListener("click", function () {
     // Toggle the password input type between 'password' and 'text'
-    if (passwordInput.type === 'password') {
-      passwordInput.type = 'text';
-      eyeIcon.classList.remove('ri-eye-off-line');
-      eyeIcon.classList.add('ri-eye-line');
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      eyeIcon.classList.remove("ri-eye-off-line");
+      eyeIcon.classList.add("ri-eye-line");
     } else {
-      passwordInput.type = 'password';
-      eyeIcon.classList.remove('ri-eye-line');
-      eyeIcon.classList.add('ri-eye-off-line');
+      passwordInput.type = "password";
+      eyeIcon.classList.remove("ri-eye-line");
+      eyeIcon.classList.add("ri-eye-off-line");
     }
   });
 </script>
