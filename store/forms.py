@@ -68,22 +68,17 @@ class SignUpForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
 
-        # إزالة القيود على اسم المستخدم
         self.fields['username'].widget.attrs['class'] = 'info-field'
         self.fields['username'].widget.attrs['placeholder'] = 'User Name'
         self.fields['username'].label = ''
-        self.fields['username'].help_text = '''<ul class="form-text text-muted small">
-                                                <li>Username must be at least 6 characters long.</li>
-                                                <li>Username should contain only letters, numbers, and underscores.</li>
-                                                <li>Username cannot be the same as your email.</li>
-                                                </ul>'''  # إزالة النص المساعد
+        self.fields['username'].help_text = ''  # إزالة النص المساعد
 
         self.fields['password1'].widget.attrs['class'] = 'info-field'
         self.fields['password1'].widget.attrs['placeholder'] = 'Password'
         self.fields['password1'].label = ''
-        self.fields['password1'].help_text = '<ul class="form-text text-muted small"><li>Your password can\'t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can\'t be a commonly used password.</li><li>Your password can\'t be entirely numeric.</li></ul>'
+        self.fields['password1'].help_text = '<span class="form-text text-muted small">Minimum 6 characters.</span>'
 
         self.fields['password2'].widget.attrs['class'] = 'info-field'
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
         self.fields['password2'].label = ''
-        self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
+        self.fields['password2'].help_text = ''
