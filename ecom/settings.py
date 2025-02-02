@@ -146,7 +146,7 @@ SECURE_SSL_REDIRECT = False
 
 CSRF_TRUSTED_ORIGINS = [
     'https://deploy1-production-84f3.up.railway.app',
-    'https://domaine-new.com',  # أدخل الدومين الجديد هنا
+    'https://dragonsportswear.store ',  # أدخل الدومين الجديد هنا
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
