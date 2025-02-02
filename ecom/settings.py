@@ -30,7 +30,7 @@ DEBUG = True
 FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50MB
 
 
-ALLOWED_HOSTS = ['deploy1-production-84f3.up.railway.app', 'localhost', '127.0.0.1', 'domaine-new.com']
+ALLOWED_HOSTS = ['deploy1-production-84f3.up.railway.app', 'localhost', '127.0.0.1', 'www.dragonsportswear.store ']
 
 
 # Application definition
