@@ -30,7 +30,7 @@ DEBUG = True
 FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50MB
 
 
-ALLOWED_HOSTS = ['deploy1-production-84f3.up.railway.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['deploy1-production-84f3.up.railway.app', 'localhost', '127.0.0.1', 'domaine-new.com']
 
 
 # Application definition
@@ -146,7 +146,9 @@ SECURE_SSL_REDIRECT = False
 
 CSRF_TRUSTED_ORIGINS = [
     'https://deploy1-production-84f3.up.railway.app',
+    'https://domaine-new.com',  # أدخل الدومين الجديد هنا
 ]
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
