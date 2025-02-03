@@ -28,13 +28,13 @@
 
         <div class="price">
           {% if product.is_sale %}
-          <span class="current-price">${{ product.sale_price }}</span>
+          <span class="current-price">EGP{{ product.sale_price }}</span>
           {% comment %}
           <span class="discount">{{ product.discount_percentage }}% off</span>
           {% endcomment %}
-          <span class="original-price">${{ product.price }}</span>
+          <span class="original-price">EGP{{ product.price }}</span>
           {% else %}
-          <span class="current-price">${{ product.price }}</span>
+          <span class="current-price">EGP{{ product.price }}</span>
           {% endif %}
         </div>
 
