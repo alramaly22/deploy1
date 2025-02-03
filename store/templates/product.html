@@ -29,7 +29,9 @@
         <div class="price">
           {% if product.is_sale %}
           <span class="current-price">${{ product.sale_price }}</span>
+          {% comment %}
           <span class="discount">{{ product.discount_percentage }}% off</span>
+          {% endcomment %}
           <span class="original-price">${{ product.price }}</span>
           {% else %}
           <span class="current-price">${{ product.price }}</span>
@@ -38,7 +40,7 @@
 
         <!-- إضافة اختيار المقاس -->
         <div class="size-selection">
-          <label for="size" style="color: white;">Size:</label>
+          <label for="size" style="color: white">Size:</label>
           <select id="size" name="size" class="size-select">
             {% if product.sizes %} {% for size in product.sizes.split %}
             <option value="{{ size }}">{{ size }}</option>
